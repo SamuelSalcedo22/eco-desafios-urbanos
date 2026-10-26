@@ -8,6 +8,7 @@ import { SpaceGrotesk_500Medium, SpaceGrotesk_700Bold } from '@expo-google-fonts
 import { AuthProvider } from './src/context/AuthContext';
 import { LanguageProvider, useLang } from './src/context/LanguageContext';
 import { RootNavigator } from './src/navigation/RootNavigator';
+import { ErrorBoundary } from './src/components/organisms/ErrorBoundary';
 import { semanticTokens as s } from './src/design';
 
 function Shell() {
@@ -15,7 +16,9 @@ function Shell() {
   // key={lang}: al cambiar de idioma se vuelve a pintar toda la app
   return (
     <NavigationContainer key={lang}>
-      <RootNavigator />
+      <ErrorBoundary>
+        <RootNavigator />
+      </ErrorBoundary>
     </NavigationContainer>
   );
 }
