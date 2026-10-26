@@ -5,6 +5,7 @@ import { Button, Chip, Text } from '../components/atoms';
 import { SectionHeader } from '../components/molecules';
 import { ImpactSummary } from '../components/organisms/ImpactSummary';
 import { HistoryList } from '../components/organisms/HistoryList';
+import { RewardsRow } from '../components/organisms/RewardsRow';
 import { ErrorBlock } from '../components/organisms/ErrorBlock';
 import { ScreenTemplate } from '../templates/ScreenTemplate';
 import { useAuth } from '../context/AuthContext';
@@ -30,6 +31,8 @@ export function ProfileScreen() {
       {profile.loading && !profile.data ? <ActivityIndicator /> : null}
       {profile.error ? <ErrorBlock error={profile.error} onRetry={profile.reload} /> : null}
       {profile.data ? <ImpactSummary profile={profile.data} /> : null}
+      <SectionHeader title={t('profile.rewards')} />
+      <RewardsRow points={profile.data?.totalPoints ?? 0} />
       <SectionHeader title={t('profile.history')} />
       {history.error ? <ErrorBlock error={history.error} onRetry={history.reload} /> : <HistoryList items={history.data ?? []} />}
       <SectionHeader title={t('profile.language')} />
