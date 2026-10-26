@@ -40,7 +40,7 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "typecheck": "tsc --noEmit",
-    "test": "node --test supabase/functions/validate-evidence/verdict.test.ts"
+    "test": "node --test supabase/functions/validate-evidence/verdict.test.ts src/utils/filterMissions.test.ts"
   },
   "private": true
 }
