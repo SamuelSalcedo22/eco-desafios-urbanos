@@ -82,6 +82,13 @@ export const en: Messages = {
     rewards: 'Rewards',
     language: 'Language',
   },
+  rewards: {
+    sprout: 'Sprout',
+    sapling: 'Sapling',
+    tree: 'Tree',
+    next: 'Next: %{name} at %{points} points',
+    all: 'You have every badge!',
+  },
   errors: {
     network: {
       what: 'We could not connect.',
