@@ -63,7 +63,7 @@ export const es = {
     locationOn: 'Ubicación lista',
     locationOff: 'Sin ubicación',
     approvedTitle: '¡Misión cumplida!',
-    approvedBody: 'Ganaste {{points}} puntos.',
+    approvedBody: 'Ganaste %{points} puntos.',
     reviewTitle: 'Tu foto quedó en revisión',
     reviewBody: 'No pudimos confirmarla solos. Un revisor la mirará pronto.',
     rejectedTitle: 'Esta foto no coincide con la misión',
