@@ -80,6 +80,13 @@ export const es = {
     rewards: 'Recompensas',
     language: 'Idioma',
   },
+  rewards: {
+    sprout: 'Brote',
+    sapling: 'Plantón',
+    tree: 'Árbol',
+    next: 'Siguiente: %{name} a los %{points} puntos',
+    all: '¡Tienes todas las insignias!',
+  },
   errors: {
     network: {
       what: 'No pudimos conectarnos.',
