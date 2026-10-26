@@ -42,3 +42,8 @@ yarn-error.*
 
 # local env
 .env
+
+# secretos locales (nunca subir)
+supabase/.env.secrets
+gcp-key*.json
+*-service-account*.json
