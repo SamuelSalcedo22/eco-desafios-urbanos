@@ -121,6 +121,14 @@ export const en: Messages = {
       what: 'We could not check your photo.',
       action: 'Try again in a moment.',
     },
+    alreadyDone: {
+      what: 'You already completed this mission today.',
+      action: 'Come back tomorrow or try another mission.',
+    },
+    duplicatePhoto: {
+      what: 'That photo was already used.',
+      action: 'Take a new photo of what you did.',
+    },
     unknown: {
       what: 'Something went wrong.',
       action: 'Try again. If it keeps happening, restart the app.',
