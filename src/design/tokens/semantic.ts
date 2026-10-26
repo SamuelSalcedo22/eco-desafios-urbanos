@@ -34,7 +34,6 @@ export const semanticTokens = {
       reciclaje: g.color.blue[500],
       deterioro: g.color.pink[500],
       residuos: g.color.yellow[500],
-      comunidad: g.color.purple[500],
     },
   },
   space: {
