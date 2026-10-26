@@ -10,19 +10,18 @@ import { ScreenTemplate } from '../templates/ScreenTemplate';
 import { useAuth } from '../context/AuthContext';
 import { useAsync } from '../hooks/useAsync';
 import { api } from '../services';
-import { getLanguage, setLanguage, t } from '../i18n';
+import { useLang } from '../context/LanguageContext';
+import { t } from '../i18n';
 import { globalTokens as g } from '../design';
 
 export function ProfileScreen() {
   const { user, signOut } = useAuth();
-  const [, force] = React.useReducer((n: number) => n + 1, 0);
   const profile = useAsync(() => api.getProfile(user!.id), [user?.id]);
   const history = useAsync(() => api.listSubmissions(user!.id), [user?.id]);
 
   useFocusEffect(useCallback(() => { profile.reload(); history.reload(); /* eslint-disable-next-line react-hooks/exhaustive-deps */ }, [user?.id]));
 
-  const lang = getLanguage();
-  const change = (l: 'es' | 'en') => { setLanguage(l); force(); };
+  const { lang, changeLang: change } = useLang();
 
   return (
     <ScreenTemplate>
