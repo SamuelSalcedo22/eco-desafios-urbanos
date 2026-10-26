@@ -4,7 +4,7 @@ export type UserError = { what: string; why?: string; action: string };
 
 export type ErrorKey =
   | 'network' | 'session' | 'credentials' | 'emailTaken' | 'weakPassword'
-  | 'cameraDenied' | 'locationDenied' | 'fileTooBig' | 'validation' | 'unknown';
+  | 'cameraDenied' | 'locationDenied' | 'fileTooBig' | 'validation' | 'alreadyDone' | 'duplicatePhoto' | 'unknown';
 
 /** Error propio de la app: lleva una clave, nunca un código técnico visible. */
 export class AppError extends Error {

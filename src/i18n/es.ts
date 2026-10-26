@@ -122,6 +122,14 @@ export const es = {
       what: 'No pudimos revisar tu foto.',
       action: 'Intenta de nuevo en un momento.',
     },
+    alreadyDone: {
+      what: 'Ya completaste esta misión hoy.',
+      action: 'Vuelve mañana o prueba con otra misión.',
+    },
+    duplicatePhoto: {
+      what: 'Esa foto ya se usó antes.',
+      action: 'Toma una foto nueva de lo que hiciste.',
+    },
     unknown: {
       what: 'Algo salió mal.',
       action: 'Intenta de nuevo. Si sigue pasando, reinicia la app.',
