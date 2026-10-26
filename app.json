@@ -12,17 +12,44 @@
     },
     "android": {
       "adaptiveIcon": {
-        "backgroundColor": "#E6F4FE",
+        "backgroundColor": "#FFC567",
         "foregroundImage": "./assets/android-icon-foreground.png",
         "backgroundImage": "./assets/android-icon-background.png",
         "monochromeImage": "./assets/android-icon-monochrome.png"
       },
       "predictiveBackGestureEnabled": false,
-      "package": "com.samuelsalcedo.ecodesafios"
+      "package": "com.samuelsalcedo.ecodesafios",
+      "permissions": [
+        "CAMERA",
+        "ACCESS_FINE_LOCATION",
+        "ACCESS_COARSE_LOCATION"
+      ]
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
-    "scheme": "ecodesafios"
+    "scheme": "ecodesafios",
+    "plugins": [
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "Eco-Desafíos Urbanos usa la cámara para tomar la foto que demuestra tu misión.",
+          "recordAudioAndroid": false
+        }
+      ],
+      [
+        "expo-location",
+        {
+          "locationWhenInUsePermission": "Usamos tu ubicación para marcar dónde hiciste la misión y validarla."
+        }
+      ],
+      "expo-font",
+      "expo-localization"
+    ],
+    "splash": {
+      "image": "./assets/splash-icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#FBF7F0"
+    }
   }
 }
