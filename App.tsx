@@ -10,6 +10,8 @@ import { LanguageProvider, useLang } from './src/context/LanguageContext';
 import { RootNavigator } from './src/navigation/RootNavigator';
 import { ErrorBoundary } from './src/components/organisms/ErrorBoundary';
 import { semanticTokens as s } from './src/design';
+import { isDemoMode } from './src/services';
+import { SetupRequiredScreen } from './src/screens/SetupRequiredScreen';
 
 function Shell() {
   const { lang } = useLang();
@@ -26,6 +28,16 @@ function Shell() {
 export default function App() {
   const [loaded] = useFonts({ ArchivoBlack_400Regular, SpaceGrotesk_500Medium, SpaceGrotesk_700Bold });
   if (!loaded) return <View style={{ flex: 1, backgroundColor: s.color.background.primary }} />;
+  // Producto real: una build instalable sin servidor nunca cae en modo demo en silencio.
+  if (!__DEV__ && isDemoMode) {
+    return (
+      <SafeAreaProvider>
+        <LanguageProvider>
+          <SetupRequiredScreen />
+        </LanguageProvider>
+      </SafeAreaProvider>
+    );
+  }
 
   return (
     <SafeAreaProvider>
