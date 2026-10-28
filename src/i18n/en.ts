@@ -11,6 +11,11 @@ export const en: Messages = {
     points: 'points',
     ok: 'Got it',
   },
+  setup: {
+    what: 'This version of the app is not connected to the server.',
+    why: 'It was built without the server address, so it cannot save your data or validate photos.',
+    action: 'Install the latest version (APK) from the project download page.',
+  },
   tabs: { missions: 'Missions', map: 'Map', ranking: 'Ranking', profile: 'Profile' },
   onboarding: {
     slides: [

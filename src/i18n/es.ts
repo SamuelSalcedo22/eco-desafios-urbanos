@@ -9,6 +9,11 @@ export const es = {
     points: 'puntos',
     ok: 'Entendido',
   },
+  setup: {
+    what: 'Esta versión de la app no está conectada al servidor.',
+    why: 'Se generó sin la dirección del servidor, así que no puede guardar tus datos ni validar fotos.',
+    action: 'Instala la última versión (APK) desde la página de descargas del proyecto.',
+  },
   tabs: { missions: 'Misiones', map: 'Mapa', ranking: 'Ranking', profile: 'Perfil' },
   onboarding: {
     slides: [
