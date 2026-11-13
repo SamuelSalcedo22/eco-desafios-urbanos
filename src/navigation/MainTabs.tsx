@@ -11,7 +11,7 @@ const Tab = createBottomTabNavigator<MainTabParamList>();
 
 export function MainTabs() {
   return (
-    <Tab.Navigator tabBar={(props) => <TabBar {...props} />} screenOptions={{ headerShown: false }}>
+    <Tab.Navigator tabBar={(props) => <TabBar {...props} />} screenOptions={{ headerShown: false, animation: 'shift' }}>
       <Tab.Screen name="Missions" component={MissionsScreen as never} />
       <Tab.Screen name="Map" component={MapScreen} />
       <Tab.Screen name="Ranking" component={RankingScreen} />
