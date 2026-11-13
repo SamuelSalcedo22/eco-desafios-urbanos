@@ -34,18 +34,18 @@ export function RootNavigator() {
   }
 
   return (
-    <Stack.Navigator screenOptions={{ headerShown: false, animation: 'slide_from_right' }}>
+    <Stack.Navigator screenOptions={{ headerShown: false, animation: 'slide_from_right', animationDuration: 280 }}>
       {user ? (
         <>
           <Stack.Screen name="Main" component={MainTabs} />
-          <Stack.Screen name="MissionDetail" component={MissionDetailScreen} />
-          <Stack.Screen name="Evidence" component={EvidenceScreen} />
-          <Stack.Screen name="Result" component={ResultScreen} options={{ gestureEnabled: false }} />
+          <Stack.Screen name="MissionDetail" component={MissionDetailScreen} options={{ animation: 'slide_from_right' }} />
+          <Stack.Screen name="Evidence" component={EvidenceScreen} options={{ animation: 'slide_from_bottom' }} />
+          <Stack.Screen name="Result" component={ResultScreen} options={{ gestureEnabled: false, animation: 'fade' }} />
         </>
       ) : (
         <>
           {!seen ? <Stack.Screen name="Onboarding" component={OnboardingScreen} /> : null}
-          <Stack.Screen name="Login" component={LoginScreen} />
+          <Stack.Screen name="Login" component={LoginScreen} options={{ animation: 'fade_from_bottom' }} />
           <Stack.Screen name="Register" component={RegisterScreen} />
         </>
       )}
