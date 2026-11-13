@@ -31,12 +31,4 @@ EXPO_PUBLIC_SUPABASE_ANON_KEY=eyJ...
 Sin `.env`, la app arranca en **modo demo** (datos guardados solo en el teléfono).
 
 ## 5. Publicar la función de validación
-En PowerShell, dentro de la carpeta del proyecto:
-```powershell
-npx supabase login
-npx supabase link --project-ref TU_PROJECT_REF
-npx supabase functions deploy validate-evidence
-```
-`TU_PROJECT_REF` es el texto entre `https://` y `.supabase.co` de tu Project URL.
-
-Los secretos de Google se configuran en `docs/vertex-ai.md`.
+Los secretos de Google y el comando para publicar la función están en `docs/vertex-ai.md`.

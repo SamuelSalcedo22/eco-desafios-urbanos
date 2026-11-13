@@ -16,25 +16,29 @@ La app **no** habla con Google directamente: la foto va a la Edge Function `vali
 3. En la cuenta creada: **Claves → Agregar clave → JSON**. Se descarga un archivo `.json`.
 4. Guárdalo **fuera** de la carpeta del repositorio (o con el nombre `gcp-key.json`, que está en `.gitignore`). No lo compartas ni lo pegues en ningún chat.
 
-## 4. Subir los secretos a Supabase
-Crea el archivo `supabase/.env.secrets` (está en `.gitignore`):
-```
-GCP_PROJECT_ID=tu-id-de-proyecto
-GCP_LOCATION=us-central1
-GEMINI_MODEL=gemini-2.5-flash
-GCP_SERVICE_ACCOUNT_JSON=<el JSON en UNA sola línea>
-```
-Para convertir el JSON a una línea en PowerShell:
-```powershell
-(Get-Content .\gcp-key.json -Raw | ConvertFrom-Json | ConvertTo-Json -Compress)
-```
-Luego:
-```powershell
-npx supabase secrets set --env-file .\supabase\.env.secrets
-```
+## 4. Guardar los secretos en Supabase (desde el navegador)
+En Supabase: **Edge Functions → Secrets** (o **Project Settings → Edge Functions → Secrets**). Agrega uno por uno:
 
-## 5. Verifica el nombre del modelo
-Los nombres de modelo de Gemini cambian con el tiempo. Revisa en la consola (**Vertex AI → Model Garden**) o en la documentación oficial cuál es un modelo Gemini "Flash" vigente con soporte de imágenes y, si es distinto, cambia `GEMINI_MODEL` y vuelve a ejecutar el comando de secretos. No hace falta tocar el código.
+| Nombre | Valor |
+|---|---|
+| `GCP_PROJECT_ID` | el **ID** del proyecto de Google (no el nombre), p. ej. `eco-desafios-urbanos-123456` |
+| `GCP_LOCATION` | `global` |
+| `GEMINI_MODEL` | `gemini-3.8-flash` |
+| `GCP_SERVICE_ACCOUNT_JSON` | abre el `.json` con el Bloc de notas, copia **todo** y pégalo tal cual |
+
+Pegarlo en el panel evita problemas con comillas y saltos de línea. Ninguno de estos valores va en el `.env` de la app.
+
+## 5. Publicar la función
+```powershell
+npx supabase login
+npx supabase functions deploy validate-evidence --project-ref TU_PROJECT_REF
+```
+`TU_PROJECT_REF` es el texto entre `https://` y `.supabase.co` de tu Project URL. No hace falta Docker.
+
+## 6. Si Google retira el modelo
+Gemini 2.5 Flash se retiró el 20 de octubre de 2026; por eso la app usa `gemini-3.8-flash`, en la ubicación `global`.
+Cuando Google retire un modelo, revisa la página oficial *Model versions and lifecycle* de Vertex AI,
+cambia el secreto `GEMINI_MODEL` en el panel y listo: no hace falta tocar el código ni generar otro APK.
 
 ## Cómo decide la app (la IA apoya, no decide sola)
 | Resultado de la IA | Ubicación | Veredicto |
