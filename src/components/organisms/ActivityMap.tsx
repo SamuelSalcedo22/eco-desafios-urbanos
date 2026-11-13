@@ -37,7 +37,14 @@ pts.forEach(function(p){L.circleMarker([p.lat,p.lng],{radius:11,color:'#0F0F0F',
 
   return (
     <View style={[neoBorder('thick'), { height: 460, borderRadius: g.radius.md, overflow: 'hidden' }]}>
-      <WebView originWhitelist={['*']} source={{ html }} style={{ flex: 1 }} javaScriptEnabled />
+      <WebView
+        originWhitelist={['*']}
+        // baseUrl da un "Referer" válido: los servidores de OpenStreetMap bloquean mapas sin él en el APK.
+        source={{ html, baseUrl: 'https://github.com/SamuelSalcedo22/eco-desafios-urbanos' }}
+        applicationNameForUserAgent="EcoDesafiosUrbanos/1.0"
+        style={{ flex: 1 }}
+        javaScriptEnabled
+      />
     </View>
   );
 }
