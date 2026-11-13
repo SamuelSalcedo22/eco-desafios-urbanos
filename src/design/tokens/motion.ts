@@ -4,7 +4,7 @@
  * como bloques físicos que caen y chocan (Neo-Brutalism).
  */
 export const motionTokens = {
-  duration: { fast: 160, base: 260, slow: 420, intro: 1900 },
+  duration: { fast: 160, base: 260, slow: 420, intro: 3600 },
   spring: {
     /** Rebote marcado: bloques que caen. */
     bouncy: { damping: 11, stiffness: 180, mass: 0.9 },

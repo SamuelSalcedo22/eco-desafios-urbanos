@@ -6,6 +6,7 @@ import Animated, {
   useReducedMotion,
   useSharedValue,
   withDelay,
+  withSequence,
   withSpring,
   withTiming,
 } from 'react-native-reanimated';
@@ -26,9 +27,15 @@ function FallingBlock({ index, reduce }: { index: number; reduce: boolean }) {
 
   useEffect(() => {
     const delay = 120 + index * 110;
-    y.value = withDelay(delay, withSpring(0, m.spring.bouncy));
+    // Cae y rebota; luego, ya en reposo, da un saltito en "ola" junto a los demás bloques.
+    y.value = reduce
+      ? 0
+      : withSequence(
+          withDelay(delay, withSpring(0, m.spring.bouncy)),
+          withDelay(1500 - delay + index * 130, withSequence(withTiming(-22, { duration: 160 }), withSpring(0, m.spring.bouncy))),
+        );
     rot.value = withDelay(delay, withSpring(TILT[index], m.spring.bouncy));
-  }, [index, rot, y]);
+  }, [index, reduce, rot, y]);
 
   const style = useAnimatedStyle(() => ({
     transform: [{ translateY: y.value }, { rotate: `${rot.value}deg` }],
