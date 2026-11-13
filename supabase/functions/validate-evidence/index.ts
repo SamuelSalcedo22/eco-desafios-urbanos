@@ -77,8 +77,8 @@ Deno.serve(async (req) => {
     ai = await validateWithGemini({
       token,
       project: Deno.env.get('GCP_PROJECT_ID')!,
-      location: Deno.env.get('GCP_LOCATION') ?? 'us-central1',
-      model: Deno.env.get('GEMINI_MODEL') ?? 'gemini-2.5-flash',
+      location: Deno.env.get('GCP_LOCATION') ?? 'global',
+      model: Deno.env.get('GEMINI_MODEL') ?? 'gemini-3.8-flash',
       missionHint: mission.vision_hint,
       images,
       beforeAfter: mission.evidence_mode === 'before_after',

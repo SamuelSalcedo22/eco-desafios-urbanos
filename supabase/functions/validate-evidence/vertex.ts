@@ -55,8 +55,10 @@ export async function validateWithGemini(opts: {
   token: string; project: string; location: string; model: string;
   missionHint: string; images: string[]; beforeAfter: boolean;
 }): Promise<AiResult> {
+  // Los modelos Gemini 3.x se sirven en la ubicación "global", que usa el host sin prefijo de región.
+  const host = opts.location === 'global' ? 'aiplatform.googleapis.com' : `${opts.location}-aiplatform.googleapis.com`;
   const url =
-    `https://${opts.location}-aiplatform.googleapis.com/v1/projects/${opts.project}` +
+    `https://${host}/v1/projects/${opts.project}` +
     `/locations/${opts.location}/publishers/google/models/${opts.model}:generateContent`;
 
   const parts: unknown[] = [{
@@ -72,7 +74,6 @@ export async function validateWithGemini(opts: {
       systemInstruction: { parts: [{ text: SYSTEM_PROMPT }] },
       contents: [{ role: 'user', parts }],
       generationConfig: {
-        temperature: 0,
         responseMimeType: 'application/json',
         responseSchema: {
           type: 'OBJECT',
@@ -89,7 +90,9 @@ export async function validateWithGemini(opts: {
   if (!res.ok) throw new Error(`vertex_failed_${res.status}`);
 
   const json = await res.json();
-  const text = json?.candidates?.[0]?.content?.parts?.[0]?.text;
+  // Los modelos con razonamiento pueden devolver varias partes: se toma la primera con texto que no sea "pensamiento".
+  const outParts: { text?: string; thought?: boolean }[] = json?.candidates?.[0]?.content?.parts ?? [];
+  const text = outParts.find((p) => typeof p.text === 'string' && !p.thought)?.text;
   const parsed = JSON.parse(text ?? '{}');
   const confidence = Math.min(1, Math.max(0, Number(parsed.confidence)));
   return {
