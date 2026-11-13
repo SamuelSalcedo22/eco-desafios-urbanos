@@ -2,7 +2,6 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { ActivityIndicator, View } from 'react-native';
 import { useFocusEffect } from '@react-navigation/native';
 import { Badge, Text } from '../components/atoms';
-import { EmptyState } from '../components/molecules';
 import { ActivityMap } from '../components/organisms/ActivityMap';
 import { ErrorBlock } from '../components/organisms/ErrorBlock';
 import { ScreenTemplate } from '../templates/ScreenTemplate';
@@ -35,8 +34,9 @@ export function MapScreen() {
       </View>
       {activities.loading && !activities.data ? <ActivityIndicator /> : null}
       {activities.error ? <ErrorBlock error={activities.error} onRetry={activities.reload} /> : null}
-      {activities.data && activities.data.length === 0 ? <EmptyState title={t('map.empty')} icon="map-outline" /> : null}
-      {activities.data && activities.data.length > 0 ? <ActivityMap activities={activities.data} center={center} /> : null}
+      {/* El mapa se muestra siempre (centrado en ti o en Pasto); si aún no hay actividades, se avisa debajo. */}
+      {!activities.error ? <ActivityMap activities={activities.data ?? []} center={center} /> : null}
+      {activities.data && activities.data.length === 0 ? <Text variant="caption">{t('map.empty')}</Text> : null}
     </ScreenTemplate>
   );
 }
