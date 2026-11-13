@@ -21,7 +21,7 @@ App instalada (APK)  ──►  Supabase (en línea)  ──►  Google Vertex A
 
 ## Lista de comprobación (en este orden)
 
-1. **Supabase:** sigue `docs/supabase.md` completo (SQL 0001 → 0002 → 0003 → seed, y desplegar la función).
+1. **Supabase:** sigue `docs/supabase.md` completo (SQL 0001 → 0002 → 0003 → 0004 → seed, y desplegar la función).
 2. **Correo sin confirmación:** *Authentication → Providers → Email* → desactiva **Confirm email**.
    Si no, el profesor no podría registrarse (el correo gratis de Supabase solo envía 2–4 mensajes por hora).
 3. **Cuenta lista para el profesor** (opcional pero recomendable): *Authentication → Users → Add user →

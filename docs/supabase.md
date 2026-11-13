@@ -10,10 +10,11 @@ En el panel: **SQL Editor → New query**. Pega y ejecuta **en este orden** el c
 1. `supabase/migrations/0001_schema.sql`
 2. `supabase/migrations/0002_security.sql`
 3. `supabase/migrations/0003_triggers.sql`
-4. `supabase/seed.sql`
+4. `supabase/migrations/0004_views_solo_usuarios.sql`
+5. `supabase/seed.sql`
 
 ## 3. Autenticación
-**Authentication → Providers → Email**: para probar rápido, desactiva *Confirm email*. (Para producción, déjalo activo.)
+**Authentication → Sign In / Providers → Email**: desactiva *Confirm email*. Así el profesor puede registrarse al instante (el correo gratis de Supabase solo envía unos pocos mensajes por hora).
 
 ## 4. Conectar la app
 **Project Settings → API**. Copia:
