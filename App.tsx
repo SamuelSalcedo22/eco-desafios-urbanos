@@ -12,6 +12,7 @@ import { ErrorBoundary } from './src/components/organisms/ErrorBoundary';
 import { semanticTokens as s } from './src/design';
 import { isDemoMode } from './src/services';
 import { SetupRequiredScreen } from './src/screens/SetupRequiredScreen';
+import { AnimatedIntro } from './src/components/motion';
 
 function Shell() {
   const { lang } = useLang();
@@ -27,6 +28,8 @@ function Shell() {
 
 export default function App() {
   const [loaded] = useFonts({ ArchivoBlack_400Regular, SpaceGrotesk_500Medium, SpaceGrotesk_700Bold });
+  const [introDone, setIntroDone] = React.useState(false);
+  const finishIntro = React.useCallback(() => setIntroDone(true), []);
   if (!loaded) return <View style={{ flex: 1, backgroundColor: s.color.background.primary }} />;
   // Producto real: una build instalable sin servidor nunca cae en modo demo en silencio.
   if (!__DEV__ && isDemoMode) {
@@ -45,6 +48,8 @@ export default function App() {
         <AuthProvider>
           <StatusBar style="dark" />
           <Shell />
+          {/* La app carga detrás mientras corre la intro; al terminar, la intro se desmonta. */}
+          {!introDone ? <AnimatedIntro onDone={finishIntro} /> : null}
         </AuthProvider>
       </LanguageProvider>
     </SafeAreaProvider>
