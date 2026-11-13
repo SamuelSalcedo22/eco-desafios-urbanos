@@ -1,4 +1,5 @@
 import React from 'react';
+import { StaggerItem } from '../motion';
 import { View } from 'react-native';
 import { Badge, NeoBox, Text } from '../atoms';
 import { EmptyState } from '../molecules';
@@ -15,20 +16,22 @@ export function HistoryList({ items }: { items: Submission[] }) {
   const locale = getLanguage() === 'en' ? 'en-US' : 'es-CO';
   return (
     <View style={{ gap: g.spacing[3] }}>
-      {items.map((s) => {
+      {items.map((s, i) => {
         const mission = getMission(s.missionId);
         return (
-          <NeoBox key={s.id} padding={g.spacing[3]} offset={g.shadowOffset.sm} radius={g.radius.sm}>
-            <View style={{ flexDirection: 'row', alignItems: 'center', gap: g.spacing[3] }}>
-              <View style={{ flex: 1, gap: 2 }}>
-                <Text variant="subtitle" numberOfLines={2}>
-                  {mission ? missionText(mission).title : s.missionId}
-                </Text>
-                <Text variant="caption">{new Date(s.createdAt).toLocaleDateString(locale)}</Text>
+          <StaggerItem key={s.id} index={i}>
+            <NeoBox padding={g.spacing[3]} offset={g.shadowOffset.sm} radius={g.radius.sm}>
+              <View style={{ flexDirection: 'row', alignItems: 'center', gap: g.spacing[3] }}>
+                <View style={{ flex: 1, gap: 2 }}>
+                  <Text variant="subtitle" numberOfLines={2}>
+                    {mission ? missionText(mission).title : s.missionId}
+                  </Text>
+                  <Text variant="caption">{new Date(s.createdAt).toLocaleDateString(locale)}</Text>
+                </View>
+                <Badge label={s.verdict === 'approved' ? `+${s.pointsAwarded}` : s.verdict === 'review' ? '…' : '✕'} bg={VERDICT_BG[s.verdict]} />
               </View>
-              <Badge label={s.verdict === 'approved' ? `+${s.pointsAwarded}` : s.verdict === 'review' ? '…' : '✕'} bg={VERDICT_BG[s.verdict]} />
-            </View>
-          </NeoBox>
+            </NeoBox>
+          </StaggerItem>
         );
       })}
     </View>
