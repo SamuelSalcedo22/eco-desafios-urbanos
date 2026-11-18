@@ -7,3 +7,4 @@ export { Input } from './Input';
 export { Chip } from './Chip';
 export { Spacer } from './Spacer';
 export { Divider } from './Divider';
+export { OnSurface, useContentColor } from './ContentColor';

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Text as RNText, TextProps, TextStyle } from 'react-native';
 import { globalTokens as g, semanticTokens as s } from '../../design';
+import { useContentColor } from './ContentColor';
 
 type Variant = 'display' | 'title' | 'subtitle' | 'body' | 'label' | 'caption';
 
@@ -15,6 +16,8 @@ const variants: Record<Variant, TextStyle> = {
 
 type Props = TextProps & { variant?: Variant; color?: string };
 
-export function Text({ variant = 'body', color = s.color.text.primary, style, ...rest }: Props) {
+export function Text({ variant = 'body', color, style, ...rest }: Props) {
+  const inherited = useContentColor();
+  color = color ?? inherited ?? s.color.text.primary;
   return <RNText {...rest} style={[variants[variant], { color }, style]} />;
 }

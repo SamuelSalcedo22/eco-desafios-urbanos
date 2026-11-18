@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Pressable, StyleProp, View, ViewStyle } from 'react-native';
 import { globalTokens as g, semanticTokens as s } from '../../design';
+import { OnSurface } from './ContentColor';
 
 type Props = {
   children?: React.ReactNode;
@@ -47,7 +48,7 @@ export function NeoBox({
           left: offset,
           right: -offset,
           bottom: -offset,
-          backgroundColor: g.color.ink[900],
+          backgroundColor: s.color.shadow,
           borderRadius: radius,
         }}
       />
@@ -57,14 +58,14 @@ export function NeoBox({
             backgroundColor: bg,
             borderRadius: radius,
             borderWidth,
-            borderColor: g.color.ink[900],
+            borderColor: s.color.border.default,
             padding,
             transform: [{ translateX: shift }, { translateY: shift }],
           },
           contentStyle,
         ]}
       >
-        {children}
+        <OnSurface bg={bg}>{children}</OnSurface>
       </View>
     </View>
   );

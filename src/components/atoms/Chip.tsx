@@ -2,6 +2,7 @@ import React from 'react';
 import { Pressable } from 'react-native';
 import { globalTokens as g, neoBorder, semanticTokens as s } from '../../design';
 import { Text } from './Text';
+import { OnSurface } from './ContentColor';
 
 type Props = { label: string; selected?: boolean; color?: string; onPress: () => void };
 
@@ -22,9 +23,11 @@ export function Chip({ label, selected, color = s.color.action.secondary, onPres
         },
       ]}
     >
-      <Text variant="label" numberOfLines={1} ellipsizeMode="tail">
-        {label}
-      </Text>
+      <OnSurface bg={selected ? color : s.color.background.surface}>
+        <Text variant="label" numberOfLines={1} ellipsizeMode="tail">
+          {label}
+        </Text>
+      </OnSurface>
     </Pressable>
   );
 }
