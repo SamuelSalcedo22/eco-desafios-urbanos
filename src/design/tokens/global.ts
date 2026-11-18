@@ -6,6 +6,8 @@ export const globalTokens = {
   color: {
     cream: { 50: '#FFFDF9', 100: '#FBF7F0', 200: '#F2EBDD' },
     ink: { 900: '#0F0F0F', 700: '#2B2B2B', 500: '#6B6B6B', 300: '#B8B2A7' },
+    /** Base oscura cálida para el modo oscuro (no gris frío). */
+    night: { 950: '#13110E', 900: '#1E1B17', 800: '#2A2620', 400: '#A39C90' },
     yellow: { 500: '#FFC567', 400: '#FFD21F' },
     pink: { 500: '#FB7DA8' },
     red: { 500: '#FD5A46' },
