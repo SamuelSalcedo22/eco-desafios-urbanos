@@ -12,7 +12,7 @@ import Animated, {
 } from 'react-native-reanimated';
 import { Icon, Text } from '../atoms';
 import { CATEGORY_META, CATEGORY_ORDER } from '../../content/categories';
-import { globalTokens as g, motionTokens as m, semanticTokens as s } from '../../design';
+import { getScheme, globalTokens as g, motionTokens as m, semanticTokens as s } from '../../design';
 import { t } from '../../i18n';
 
 const BLOCK = 76;
@@ -43,9 +43,9 @@ function FallingBlock({ index, reduce }: { index: number; reduce: boolean }) {
 
   return (
     <Animated.View style={[{ width: BLOCK, height: BLOCK }, style]}>
-      <View style={[styles.block, styles.shadow]} />
-      <View style={[styles.block, { backgroundColor: meta.color }]}>
-        <Icon name={meta.icon} size={34} />
+      <View style={[styles.block, styles.shadow, { backgroundColor: s.color.shadow, borderColor: s.color.shadow }]} />
+      <View style={[styles.block, { backgroundColor: meta.color, borderColor: s.color.border.default }]}>
+        <Icon name={meta.icon} size={34} color={g.color.ink[900]} />
       </View>
     </Animated.View>
   );
@@ -86,7 +86,7 @@ export function AnimatedIntro({ onDone }: { onDone: () => void }) {
   const exitStyle = useAnimatedStyle(() => ({ opacity: exitOpacity.value, transform: [{ translateY: exitY.value }] }));
 
   return (
-    <Animated.View style={[StyleSheet.absoluteFill, styles.root, exitStyle]} accessibilityLabel={t('common.appName')}>
+    <Animated.View style={[StyleSheet.absoluteFill, styles.root, { backgroundColor: s.color.background.primary }, exitStyle]} accessibilityLabel={t('common.appName')}>
       <View style={styles.grid}>
         {CATEGORY_ORDER.map((c, i) => (
           <FallingBlock key={c} index={i} reduce={reduce} />
@@ -97,8 +97,9 @@ export function AnimatedIntro({ onDone }: { onDone: () => void }) {
           ECO-{'\n'}DESAFÍOS
         </Text>
       </Animated.View>
-      <Animated.View style={[styles.bar, barStyle]}>
-        <Text variant="title" color={g.color.yellow[500]}>
+      <Animated.View style={[styles.bar, { backgroundColor: s.color.border.default }, barStyle]}>
+        {/* Franja invertida: tinta con amarillo en claro, crema con morado en oscuro. */}
+        <Text variant="title" color={getScheme() === 'dark' ? g.color.purple[500] : g.color.yellow[500]}>
           URBANOS
         </Text>
       </Animated.View>
@@ -108,7 +109,6 @@ export function AnimatedIntro({ onDone }: { onDone: () => void }) {
 
 const styles = StyleSheet.create({
   root: {
-    backgroundColor: s.color.background.primary,
     alignItems: 'center',
     justifyContent: 'center',
     gap: g.spacing[6],
@@ -121,13 +121,11 @@ const styles = StyleSheet.create({
     height: BLOCK,
     borderRadius: g.radius.md,
     borderWidth: g.border.thick,
-    borderColor: g.color.ink[900],
     alignItems: 'center',
     justifyContent: 'center',
   },
-  shadow: { backgroundColor: g.color.ink[900], left: g.shadowOffset.md, top: g.shadowOffset.md },
+  shadow: { left: g.shadowOffset.md, top: g.shadowOffset.md },
   bar: {
-    backgroundColor: g.color.ink[900],
     paddingHorizontal: g.spacing[5],
     paddingVertical: g.spacing[2],
   },

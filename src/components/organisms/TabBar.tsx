@@ -3,8 +3,8 @@ import { Pressable, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Animated, { useAnimatedStyle, useSharedValue, withSequence, withSpring } from 'react-native-reanimated';
 import type { BottomTabBarProps } from '@react-navigation/bottom-tabs';
-import { Icon, Text } from '../atoms';
-import { componentTokens as c, globalTokens as g, motionTokens as m } from '../../design';
+import { Icon, OnSurface, Text } from '../atoms';
+import { componentTokens as c, globalTokens as g, motionTokens as m, semanticTokens as s } from '../../design';
 import { t } from '../../i18n';
 
 const ICONS = { Missions: 'leaf', Map: 'map', Ranking: 'trophy', Profile: 'person' } as const;
@@ -33,7 +33,7 @@ function TabIcon({ name, focused }: { name: keyof typeof ICONS; focused: boolean
 export function TabBar({ state, navigation }: BottomTabBarProps) {
   const insets = useSafeAreaInsets();
   return (
-    <View style={{ flexDirection: 'row', backgroundColor: c.tabBar.bg, borderTopWidth: g.border.heavy, borderTopColor: g.color.ink[900], paddingBottom: insets.bottom, minHeight: c.tabBar.height + insets.bottom }}>
+    <View style={{ flexDirection: 'row', backgroundColor: c.tabBar.bg, borderTopWidth: g.border.heavy, borderTopColor: s.color.border.default, paddingBottom: insets.bottom, minHeight: c.tabBar.height + insets.bottom }}>
       {state.routes.map((route, index) => {
         const focused = state.index === index;
         const name = route.name as keyof typeof ICONS;
@@ -48,12 +48,14 @@ export function TabBar({ state, navigation }: BottomTabBarProps) {
               const e = navigation.emit({ type: 'tabPress', target: route.key, canPreventDefault: true });
               if (!focused && !e.defaultPrevented) navigation.navigate(route.name);
             }}
-            style={{ flex: 1, alignItems: 'center', justifyContent: 'center', gap: 2, paddingHorizontal: 2, backgroundColor: focused ? c.tabBar.activeBg : 'transparent', borderRightWidth: index < state.routes.length - 1 ? g.border.thin : 0, borderRightColor: g.color.ink[900] }}
+            style={{ flex: 1, alignItems: 'center', justifyContent: 'center', gap: 2, paddingHorizontal: 2, backgroundColor: focused ? c.tabBar.activeBg : 'transparent', borderRightWidth: index < state.routes.length - 1 ? g.border.thin : 0, borderRightColor: s.color.border.default }}
           >
-            <TabIcon name={name} focused={focused} />
-            <Text variant="caption" numberOfLines={1} ellipsizeMode="tail" style={{ fontFamily: g.fontFamily.bodyBold, maxWidth: '100%' }}>
-              {label}
-            </Text>
+            <OnSurface bg={focused ? c.tabBar.activeBg : c.tabBar.bg}>
+              <TabIcon name={name} focused={focused} />
+              <Text variant="caption" numberOfLines={1} ellipsizeMode="tail" style={{ fontFamily: g.fontFamily.bodyBold, maxWidth: '100%' }}>
+                {label}
+              </Text>
+            </OnSurface>
           </Pressable>
         );
       })}

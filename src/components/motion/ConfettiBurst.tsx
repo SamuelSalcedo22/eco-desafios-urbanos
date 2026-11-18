@@ -8,7 +8,7 @@ import Animated, {
   withDelay,
   withTiming,
 } from 'react-native-reanimated';
-import { globalTokens as g } from '../../design';
+import { globalTokens as g, semanticTokens as s } from '../../design';
 
 const COLORS = [g.color.yellow[500], g.color.pink[500], g.color.red[500], g.color.purple[500], g.color.green[500], g.color.blue[500]];
 const COUNT = 36;
@@ -54,7 +54,7 @@ function Confetto({ piece, height }: { piece: Piece; height: number }) {
     <Animated.View
       style={[
         styles.piece,
-        { left: piece.x, width: piece.size, height: piece.round ? piece.size : piece.size * 0.6, backgroundColor: piece.color, borderRadius: piece.round ? piece.size : 2 },
+        { borderColor: s.color.border.default, left: piece.x, width: piece.size, height: piece.round ? piece.size : piece.size * 0.6, backgroundColor: piece.color, borderRadius: piece.round ? piece.size : 2 },
         style,
       ]}
     />
@@ -78,5 +78,5 @@ export function ConfettiBurst() {
 }
 
 const styles = StyleSheet.create({
-  piece: { position: 'absolute', top: 0, borderWidth: 2, borderColor: g.color.ink[900] },
+  piece: { position: 'absolute', top: 0, borderWidth: 2 },
 });

@@ -25,7 +25,7 @@ export function MissionCard({ mission, done, onPress }: Props) {
       <NeoBox onPress={onPress} padding={g.spacing[4]} accessibilityLabel={text.title}>
         <View style={{ flexDirection: 'row', gap: g.spacing[3], alignItems: 'center' }}>
           <View style={[neoBorder('thick'), { width: 56, height: 56, borderRadius: g.radius.sm, backgroundColor: meta.color, alignItems: 'center', justifyContent: 'center' }]}>
-            <Icon name={done ? 'checkmark' : meta.icon} size={28} />
+            <Icon name={done ? 'checkmark' : meta.icon} size={28} color={g.color.ink[900]} />
           </View>
           <View style={{ flex: 1, gap: g.spacing[1] }}>
             <Text variant="subtitle" numberOfLines={2}>

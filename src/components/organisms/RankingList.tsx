@@ -4,7 +4,7 @@ import { View } from 'react-native';
 import { NeoBox, Text } from '../atoms';
 import { PointsPill } from '../molecules';
 import { t } from '../../i18n';
-import { globalTokens as g } from '../../design';
+import { globalTokens as g, semanticTokens as s } from '../../design';
 import type { RankingEntry } from '../../types';
 
 const PODIUM = [g.color.yellow[400], g.color.cream[200], g.color.pink[500]];
@@ -16,7 +16,7 @@ export function RankingList({ entries, meId }: { entries: RankingEntry[]; meId?:
         const mine = e.id === meId;
         return (
           <StaggerItem key={e.id} index={i}>
-            <NeoBox bg={mine ? g.color.blue[500] + '33' : g.color.white} padding={g.spacing[3]} offset={g.shadowOffset.sm} radius={g.radius.sm}>
+            <NeoBox bg={mine ? g.color.blue[500] : s.color.background.surface} padding={g.spacing[3]} offset={g.shadowOffset.sm} radius={g.radius.sm}>
               <View style={{ flexDirection: 'row', alignItems: 'center', gap: g.spacing[3] }}>
                 <View
                   style={{
@@ -30,7 +30,7 @@ export function RankingList({ entries, meId }: { entries: RankingEntry[]; meId?:
                     justifyContent: 'center',
                   }}
                 >
-                  <Text variant="label">{i + 1}</Text>
+                  <Text variant="label" color={g.color.ink[900]}>{i + 1}</Text>
                 </View>
                 <Text variant="subtitle" style={{ flex: 1 }} numberOfLines={1}>
                   {mine ? `${e.name} (${t('ranking.you')})` : e.name}

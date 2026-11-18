@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 import { View } from 'react-native';
 import { WebView } from 'react-native-webview';
 import { CATEGORY_META } from '../../content/categories';
-import { globalTokens as g, neoBorder } from '../../design';
+import { getScheme, globalTokens as g, neoBorder, semanticTokens as s } from '../../design';
 import type { MapActivity } from '../../types';
 
 type Props = { activities: MapActivity[]; center: { latitude: number; longitude: number } };
@@ -22,16 +22,19 @@ export function ActivityMap({ activities, center }: Props) {
       title: a.title,
       color: CATEGORY_META[a.category].color,
     }));
+    const dark = getScheme() === 'dark';
+    // En oscuro se invierten las teselas de OpenStreetMap (mapa nocturno) y el borde de los puntos pasa a crema.
+    const tileCss = dark ? '.leaflet-tile{filter:invert(1) hue-rotate(180deg) brightness(.85) contrast(.9)}' : '';
     return `<!doctype html><html><head><meta name="viewport" content="width=device-width,initial-scale=1">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
-<style>html,body,#map{height:100%;margin:0}.leaflet-container{background:#FBF7F0;font-family:sans-serif}</style></head>
+<style>html,body,#map{height:100%;margin:0}.leaflet-container{background:${s.color.background.primary};font-family:sans-serif}${tileCss}</style></head>
 <body><div id="map"></div>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
 var pts=${safeJson(points)};var c=${safeJson([center.latitude, center.longitude])};
 var map=L.map('map',{zoomControl:true}).setView(c,14);
 L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'&copy; OpenStreetMap'}).addTo(map);
-pts.forEach(function(p){L.circleMarker([p.lat,p.lng],{radius:11,color:'#0F0F0F',weight:3,fillColor:p.color,fillOpacity:1}).addTo(map).bindPopup(p.title);});
+pts.forEach(function(p){L.circleMarker([p.lat,p.lng],{radius:11,color:'${s.color.border.default}',weight:3,fillColor:p.color,fillOpacity:1}).addTo(map).bindPopup(p.title);});
 </script></body></html>`;
   }, [activities, center.latitude, center.longitude]);
 

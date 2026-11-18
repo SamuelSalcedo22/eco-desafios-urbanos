@@ -1,6 +1,6 @@
 import React from 'react';
 import { View } from 'react-native';
-import { Icon, Text } from '../atoms';
+import { Icon, OnSurface, Text } from '../atoms';
 import { globalTokens as g, neoBorder } from '../../design';
 
 export function PointsPill({ points, bg = g.color.yellow[400] }: { points: number; bg?: string }) {
@@ -11,10 +11,12 @@ export function PointsPill({ points, bg = g.color.yellow[400] }: { points: numbe
         { flexDirection: 'row', alignItems: 'center', gap: g.spacing[1], backgroundColor: bg, borderRadius: g.radius.pill, paddingHorizontal: g.spacing[3], paddingVertical: g.spacing[1], alignSelf: 'flex-start' },
       ]}
     >
-      <Icon name="flash" size={14} />
-      <Text variant="label" numberOfLines={1}>
-        {points}
-      </Text>
+      <OnSurface bg={bg}>
+        <Icon name="flash" size={14} />
+        <Text variant="label" numberOfLines={1}>
+          {points}
+        </Text>
+      </OnSurface>
     </View>
   );
 }

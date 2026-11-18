@@ -4,7 +4,7 @@ import { View } from 'react-native';
 import { Icon, NeoBox, Text } from '../atoms';
 import { REWARDS, nextReward, unlockedRewards } from '../../content/rewards';
 import { t } from '../../i18n';
-import { globalTokens as g } from '../../design';
+import { globalTokens as g, semanticTokens as s } from '../../design';
 
 export function RewardsRow({ points }: { points: number }) {
   const unlocked = new Set(unlockedRewards(points).map((r) => r.id));
@@ -17,7 +17,7 @@ export function RewardsRow({ points }: { points: number }) {
           return (
             <StaggerItem key={r.id} index={i} style={{ flex: 1 }}>
               <NeoBox
-                bg={on ? r.color : g.color.cream[200]}
+                bg={on ? r.color : s.color.background.muted}
                 offset={g.shadowOffset.sm}
                 radius={g.radius.sm}
                 padding={g.spacing[3]}
