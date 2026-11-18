@@ -12,6 +12,7 @@ import { useAuth } from '../context/AuthContext';
 import { useAsync } from '../hooks/useAsync';
 import { api } from '../services';
 import { useLang } from '../context/LanguageContext';
+import { useTheme, type ThemeMode } from '../context/ThemeContext';
 import { t } from '../i18n';
 import { globalTokens as g } from '../design';
 
@@ -23,6 +24,7 @@ export function ProfileScreen() {
   useFocusEffect(useCallback(() => { profile.reload(); history.reload(); /* eslint-disable-next-line react-hooks/exhaustive-deps */ }, [user?.id]));
 
   const { lang, changeLang: change } = useLang();
+  const { mode, setMode } = useTheme();
 
   return (
     <ScreenTemplate>
@@ -39,6 +41,18 @@ export function ProfileScreen() {
       <View style={{ flexDirection: 'row', gap: g.spacing[2] }}>
         <Chip label="Español" selected={lang === 'es'} onPress={() => change('es')} />
         <Chip label="English" selected={lang === 'en'} onPress={() => change('en')} />
+      </View>
+      <SectionHeader title={t('profile.appearance')} />
+      <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: g.spacing[2] }}>
+        {(['system', 'light', 'dark'] as ThemeMode[]).map((m) => (
+          <Chip
+            key={m}
+            label={t(m === 'system' ? 'profile.themeSystem' : m === 'light' ? 'profile.themeLight' : 'profile.themeDark')}
+            color={m === 'dark' ? g.color.purple[500] : g.color.yellow[500]}
+            selected={mode === m}
+            onPress={() => setMode(m)}
+          />
+        ))}
       </View>
       <Button label={t('auth.logout')} onPress={signOut} variant="ghost" arrow={false} />
     </ScreenTemplate>

@@ -46,3 +46,12 @@ dos resortes (`bouncy` para bloques que caen, `snappy` para tarjetas y textos) y
 
 **Accesibilidad:** si el teléfono tiene activado *Reducir movimiento*, no hay confeti, los puntos
 aparecen directo y la intro solo se desvanece.
+
+## Modo claro y oscuro
+
+El usuario elige en **Perfil → Apariencia**: *Sistema* (sigue al teléfono, por defecto), *Claro* u *Oscuro*. La elección se guarda en el teléfono.
+
+- **Tokens:** `semantic.ts` define dos esquemas (`schemes.light` y `schemes.dark`) para fondos, texto, bordes y sombra. Los colores Retro de acción y categoría son iguales en ambos.
+- **Neo-Brutalism invertido:** en oscuro el fondo es casi negro cálido (`night`) y los bordes gruesos y sombras duras pasan de tinta a crema, así el estilo se mantiene.
+- **Contraste automático:** `contentOn(bg)` (en `design/theme.ts`) elige texto tinta o crema según el fondo; `NeoBox`, `Badge`, `Chip` y la barra de pestañas lo aplican a su contenido con `OnSurface`. Todos los pares cumplen WCAG AA (≥ 4,5:1).
+- **Detalles:** el mapa usa teselas nocturnas, la franja "URBANOS" de la intro pasa a crema con morado y la barra de estado cambia a texto claro.

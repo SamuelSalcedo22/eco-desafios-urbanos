@@ -86,6 +86,10 @@ export const en: Messages = {
     historyEmpty: 'You have not completed any missions yet.',
     rewards: 'Rewards',
     language: 'Language',
+    appearance: 'Appearance',
+    themeSystem: 'System',
+    themeLight: 'Light',
+    themeDark: 'Dark',
   },
   rewards: {
     sprout: 'Sprout',

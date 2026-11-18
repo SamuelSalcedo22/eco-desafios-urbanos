@@ -84,6 +84,10 @@ export const es = {
     historyEmpty: 'Aún no has completado misiones.',
     rewards: 'Recompensas',
     language: 'Idioma',
+    appearance: 'Apariencia',
+    themeSystem: 'Sistema',
+    themeLight: 'Claro',
+    themeDark: 'Oscuro',
   },
   rewards: {
     sprout: 'Brote',

@@ -13,7 +13,7 @@ import { getCoords, Coords } from '../services/location';
 import type { PreparedPhoto } from '../services/photo';
 import { t } from '../i18n';
 import { toUserError, UserError } from '../utils/errors';
-import { globalTokens as g } from '../design';
+import { globalTokens as g, semanticTokens as s } from '../design';
 import type { RootStackParamList } from '../navigation/types';
 
 export function EvidenceScreen({ route, navigation }: NativeStackScreenProps<RootStackParamList, 'Evidence'>) {
@@ -60,7 +60,7 @@ export function EvidenceScreen({ route, navigation }: NativeStackScreenProps<Roo
       </Text>
       <Text variant="display">{missionText(mission).title}</Text>
       <View style={{ flexDirection: 'row' }}>
-        <Badge label={coords ? t('evidence.locationOn') : t('evidence.locationOff')} bg={coords ? g.color.green[500] : g.color.cream[200]} />
+        <Badge label={coords ? t('evidence.locationOn') : t('evidence.locationOff')} bg={coords ? g.color.green[500] : s.color.background.muted} />
       </View>
       {photos.map((photo, i) => (
         <EvidenceCapture key={i} label={labels[i]} photo={photo} onCapture={(p) => setPhotos((prev) => prev.map((x, idx) => (idx === i ? p : x)))} />

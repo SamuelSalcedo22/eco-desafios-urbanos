@@ -5,7 +5,7 @@ import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { Button, Icon, NeoBox, Text } from '../components/atoms';
 import { ScreenTemplate } from '../templates/ScreenTemplate';
 import { t, i18n } from '../i18n';
-import { globalTokens as g } from '../design';
+import { globalTokens as g, semanticTokens as s } from '../design';
 import type { RootStackParamList } from '../navigation/types';
 
 export const ONBOARDING_KEY = 'onboarding:seen';
@@ -54,7 +54,7 @@ export function OnboardingScreen({ navigation }: NativeStackScreenProps<RootStac
         </View>
         <View style={{ flexDirection: 'row', gap: g.spacing[2] }}>
           {slides.map((_, i) => (
-            <View key={i} style={{ width: i === index ? 28 : 12, height: 12, borderRadius: 6, borderWidth: 2, borderColor: g.color.ink[900], backgroundColor: i === index ? g.color.ink[900] : 'transparent' }} />
+            <View key={i} style={{ width: i === index ? 28 : 12, height: 12, borderRadius: 6, borderWidth: 2, borderColor: s.color.border.default, backgroundColor: i === index ? s.color.border.default : 'transparent' }} />
           ))}
         </View>
       </View>

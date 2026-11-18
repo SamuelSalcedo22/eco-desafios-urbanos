@@ -38,7 +38,7 @@ export function MissionDetailScreen({ route, navigation }: NativeStackScreenProp
       {text.steps.map((step, i) => (
         <View key={i} style={{ flexDirection: 'row', gap: g.spacing[3], alignItems: 'flex-start' }}>
           <View style={[neoBorder('thick'), { width: 36, height: 36, borderRadius: 18, backgroundColor: g.color.yellow[500], alignItems: 'center', justifyContent: 'center' }]}>
-            <Text variant="label">{i + 1}</Text>
+            <Text variant="label" color={g.color.ink[900]}>{i + 1}</Text>
           </View>
           <Text variant="body" style={{ flex: 1, paddingTop: 4 }}>
             {step}
